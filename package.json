@@ -24,7 +24,7 @@
       "git add"
     ],
     "**/Dockerfile": [
-      "hadolint --ignore DL4006"
+      "hadolint --ignore DL4006 --ignore DL3002"
     ]
   },
   "repository": {
