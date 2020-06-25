@@ -1,4 +1,4 @@
-# GCP Genomics
+# GCP Genomics ![Spark Job CI](https://github.com/david30907d/GCP-genomics/workflows/Spark%20Job%20CI/badge.svg)
 
 A repo which leverage GCP DataProc to analyze genomics data
 
@@ -19,4 +19,4 @@ gcloud dataproc jobs submit pyspark \
 
 docker pull jupyter/pyspark-notebook:ubuntu-18.04
 
-spark-submit a.py
+/usr/local/spark/bin/spark-submit a.py
