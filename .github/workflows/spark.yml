@@ -34,6 +34,7 @@ jobs:
           docker build --cache-from ${RC_NAME}:cache -t ${RC_NAME} .
           docker tag ${RC_NAME} ${RC_NAME}:${GITHUB_SHA}
           docker tag ${RC_NAME} ${RC_NAME}:cache
+          docker tag ${RC_NAME} ${RC_NAME}:${{steps.date.outputs.date}}
 
       - name: Run end-to-end testing
         run: |
