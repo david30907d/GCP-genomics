@@ -20,3 +20,10 @@ gcloud dataproc jobs submit pyspark \
 docker pull jupyter/pyspark-notebook:ubuntu-18.04
 
 /usr/local/spark/bin/spark-submit a.py
+
+## ERROR:
+
+1. `gcloud config set compute/region ""`:
+```
+ERROR: (gcloud.beta.lifesciences.pipelines.run) INVALID_ARGUMENT: Error: validating pipeline: zones and regions cannot be specified together
+```
