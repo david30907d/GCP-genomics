@@ -10,6 +10,7 @@ A repo which leverage GCP DataProc to analyze genomics data
 
 ## RUN
 
+### Local
 ```bash
 gcloud dataproc jobs submit pyspark \
     gs://dataproc-examples/pyspark/hello-world/hello-world.py \
@@ -27,3 +28,11 @@ docker pull jupyter/pyspark-notebook:ubuntu-18.04
 ```
 ERROR: (gcloud.beta.lifesciences.pipelines.run) INVALID_ARGUMENT: Error: validating pipeline: zones and regions cannot be specified together
 ```
+### GCP
+
+1. `gcloud dataproc clusters create test2-cluster --region=asia-east1 --master-machine-type=custom-1-3584 --worker-machine-type=custom-1-3584 (--num-secondary-workers=2)`
+2. `gcloud dataproc jobs submit spark --cluster test2-cluster \
+  --region=asia-east1 \
+  --class org.apache.spark.examples.SparkPi \
+  --jars file:///usr/lib/spark/examples/jars/spark-examples.jar -- 1000`
+3. `gcloud dataproc clusters delete test2-cluster --region=asia-east1`
