@@ -40,9 +40,9 @@ jobs:
         run: |
           # create container first
           docker run -i --rm -p 8888:8888 -e GRANT_SUDO=yes --user root ${RC_NAME} bash -c "/usr/local/spark/bin/spark-submit python_scripts/main.py"
+          [ $? -eq 0 ]  || exit 1
 
           docker run -i --rm -p 8888:8888 -e GRANT_SUDO=yes --user root ${RC_NAME} bash -c "./nextflow run nextflow_pipelines/helloworld.nf"
-
           [ $? -eq 0 ]  || exit 1
 
       - name: Push to docker registry
