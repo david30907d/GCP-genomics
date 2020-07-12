@@ -1,4 +1,4 @@
-name: Nextflow CI
+name: Docker Image CI
 
 on:
   push:
@@ -31,7 +31,7 @@ jobs:
       - name: Build image
         if: always()
         run: |
-          docker build --cache-from ${RC_NAME}:cache -t ${RC_NAME} -f dockerfiles/Dockerfile.nextflow .
+          docker build --cache-from ${RC_NAME}:cache -t ${RC_NAME} .
           docker tag ${RC_NAME} ${RC_NAME}:${GITHUB_SHA}
           docker tag ${RC_NAME} ${RC_NAME}:cache
           docker tag ${RC_NAME} ${RC_NAME}:${{steps.date.outputs.date}}

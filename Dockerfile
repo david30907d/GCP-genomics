@@ -31,7 +31,9 @@ RUN wget https://github.com/samtools/htslib/releases/download/1.9/htslib-1.9.tar
     && wget https://github.com/samtools/samtools/releases/download/1.9/samtools-1.9.tar.bz2 \
     && tar -vxjf samtools-1.9.tar.bz2 \
     && wget https://github.com/samtools/bcftools/releases/download/1.9/bcftools-1.9.tar.bz2 \
-    && tar -vxjf bcftools-1.9.tar.bz2
+    && tar -vxjf bcftools-1.9.tar.bz2 \
+    && wget https://www.well.ox.ac.uk/~cfreeman/software/gwas/gtool_v0.7.5_x86_64.tgz \
+    && tar -zxvf gtool_v0.7.5_x86_64.tgz
 
 # Install HTSLIB
 WORKDIR /usr/bin/htslib-1.9
