@@ -15,14 +15,24 @@ vcf_partition = Channel.fromPath(params.vcf_base_dir + "/*.vcf")
 
 process transformPartitions {
     echo true
+
     input:
     val vcf from vcf_partition
 
-    output:
-    // val x into receiver
+    shell:
+    """
+    plink1.9 --vcf !{vcf} --recode oxford --out !{vcf}
+    """
+}
+
+gens = Channel.fromPath(params.vcf_base_dir + "/*.gen").toList().get().join(" ")
+samples = Channel.fromPath(params.vcf_base_dir + "/*.sample").toList().get().join(" ")
+
+process mergeGens {
+    echo true
 
     shell:
     """
-    plink1.9 --vcf !{vcf} --recode oxford
+    gtool -M --g !{gens} --s !{samples} --og merged.gen --os merged.sample
     """
 }
