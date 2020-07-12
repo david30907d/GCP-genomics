@@ -1,4 +1,4 @@
-name: Spark Job CI
+name: Nextflow CI
 
 on:
   push:
@@ -31,18 +31,14 @@ jobs:
       - name: Build image
         if: always()
         run: |
-          docker build --cache-from ${RC_NAME}:cache -t ${RC_NAME} .
+          docker build --cache-from ${RC_NAME}:cache -t ${RC_NAME} -f dockerfiles/Dockerfile.nextflow .
           docker tag ${RC_NAME} ${RC_NAME}:${GITHUB_SHA}
           docker tag ${RC_NAME} ${RC_NAME}:cache
           docker tag ${RC_NAME} ${RC_NAME}:${{steps.date.outputs.date}}
 
       - name: Run end-to-end testing
         run: |
-          # create container first
-          docker run -i --rm -p 8888:8888 -e GRANT_SUDO=yes --user root ${RC_NAME} bash -c "/usr/local/spark/bin/spark-submit python_scripts/main.py"
-          [ $? -eq 0 ]  || exit 1
-
-          docker run -i --rm -p 8888:8888 -e GRANT_SUDO=yes --user root ${RC_NAME} bash -c "./nextflow run nextflow_pipelines/helloworld.nf"
+          docker run -i --rm -p 8888:8888 -e GRANT_SUDO=yes --user root ${RC_NAME} bash -c "./nextflow run /app/nextflow_pipelines/helloworld.nf --vcf_base_dir /app/*.vcf"
           [ $? -eq 0 ]  || exit 1
 
       - name: Push to docker registry

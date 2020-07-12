@@ -23,7 +23,7 @@
       "bandit",
       "git add"
     ],
-    "**/Dockerfile": [
+    "**/Dockerfile*": [
       "hadolint --ignore DL4006"
     ]
   },

@@ -1,5 +1,7 @@
 #!/usr/bin/env nextflow
 
+params.vcf_base_dir = '/app'
+
 process splitDatasetIntoPartitions {
     echo true
 
@@ -9,7 +11,7 @@ process splitDatasetIntoPartitions {
     """
 }
 
-vcf_partition = Channel.fromPath("/app/*.vcf")
+vcf_partition = Channel.fromPath(params.vcf_base_dir + "/*.vcf")
 
 process transformPartitions {
     echo true
