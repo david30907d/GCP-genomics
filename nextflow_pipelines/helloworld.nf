@@ -33,6 +33,6 @@ process mergeGens {
 
     shell:
     """
-    gtool -M --g !{gens} --s !{samples} --og merged.gen --os merged.sample
+    gtool -M --g !{gens} --s !{samples} --og !{params.vcf_base_dir}/merged.gen --os !{params.vcf_base_dir}/merged.sample
     """
 }
